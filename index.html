@@ -5,14 +5,14 @@
 <title>FY25 Chelsea Flood Wall — Job Sheet</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Default paper size for the one-page print scaler: letter | a4 -->
+<!-- Default paper size for print: letter | a4 -->
 <meta name="paper" content="letter">
 
 <style>
   :root{
     --ink:#111; --muted:#444; --gray:#666; --bg:#fff; --bar:#e9ecef; --pad:12px;
-    /* ↓ Reduce all font sizes by 30% */
-    --fs: 0.7; /* 70% of original */
+    /* ↓ Fonts reduced to 49% of the original (previous 70% × 70%) */
+    --fs: 0.49;
   }
 
   *{box-sizing:border-box}
@@ -21,7 +21,6 @@
     margin:0; background:#f5f5f5; color:var(--ink);
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", sans-serif;
   }
-  /* Base font size scaled down by 30% */
   body{ font-size: calc(16px * var(--fs)); }
 
   .sheet{
@@ -56,17 +55,17 @@
   .small{font-size: calc(12px * var(--fs));}
   .sumrow{display:flex; justify-content:flex-end; gap:12px; margin-top:6px; font-weight:700}
   .sumrow .v{min-width:140px; text-align:right; font-variant-numeric: tabular-nums;}
-  .footer-actions{max-width:860px;margin:8px auto 24px;display:flex;justify-content:flex-end;gap:8px}
-  .btn{appearance:none;border:1px solid #111;background:#111;color:#fff;border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer}
 
-  /* Keep sections intact if the user prints without the fitter */
+  /* Keep sections intact when printing */
   .block, .bar { break-inside: avoid; page-break-inside: avoid; }
 
   @media print{
     @page{size: Letter; margin: 0.4in}
     body{background:#fff; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
-    .sheet{box-shadow:none; margin:0 auto; border:2px solid #000; page-break-inside: avoid;}
-    .footer-actions{display:none}
+    .sheet{
+      box-shadow:none; margin:0 auto; border:2px solid #000; page-break-inside: avoid;
+      width: 7.6in; padding: 12px; /* tighter fit on one page */
+    }
   }
 </style>
 </head>
@@ -130,7 +129,7 @@
 
       <div class="invline">
         <input type="checkbox">
-        <div>HP1&nbsp;INV&nbsp;<input type="text" placeholder=""> </div>
+        <div>HP1&nbsp;INV&nbsp;<input type="text" placeholder=""></div>
         <div class="amt" id="a_hp1">—</div>
       </div>
 
@@ -358,11 +357,6 @@
 
 </div>
 
-<!-- Bottom buttons -->
-<div class="footer-actions">
-  <button class="btn" onclick="fitAndPrint()">Print Single Page PDF</button>
-</div>
-
 <script>
   const fmt = new Intl.NumberFormat(undefined,{style:'currency',currency:'USD'});
   const $ = (id)=>document.getElementById(id);
@@ -370,6 +364,7 @@
   function recalc(){
     const T = Number($('budget').value)||0;
     const D = T*0.25, F = T*0.75;
+    const h = Number($('hp1').value)||0;
 
     $('budgetEcho').textContent = T? `Entered: ${fmt.format(T)}` : '';
     $('designBudget').textContent = D? fmt.format(D):'';
@@ -397,53 +392,14 @@
     $('sum_cp4').textContent = F? fmt.format(cp4):'—';
 
     const contract = dp1+dp2+dp3+dp4+cp1+cp2+cp3+cp4;
-    const h = Number($('hp1').value)||0;
+
+    $('a_hp1').textContent = h ? fmt.format(h) : '—';
     $('contractTotal').textContent = T? fmt.format(contract):'—';
     $('honorTotal').textContent = fmt.format(h);
     $('grandTotal').textContent = fmt.format(contract+h);
 
     const diff = Math.abs(T - contract);
     $('matchNote').textContent = T? (diff<=0.01 ? 'OK: Contract total matches total budget.' : 'Warning: Contract total does not match total budget.') : '';
-  }
-
-  // --- One-page print helper ---
-  function fitAndPrint(){
-    const sheet = document.getElementById('sheet');
-
-    // paper size from <meta name="paper">
-    const paper = (document.querySelector('meta[name="paper"]')?.content || 'letter').toLowerCase();
-    let wIn = 8.5, hIn = 11;                // Letter
-    if (paper === 'a4') { wIn = 8.27; hIn = 11.69; }
-
-    const marginIn = 0.4;                   // matches @page margin
-    const availWpx = (wIn - marginIn*2) * 96;
-    const availHpx = (hIn - marginIn*2) * 96;
-
-    // Reset any previous transform
-    sheet.style.transform = '';
-    sheet.style.transformOrigin = '';
-
-    // Target width slightly less than printable width
-    sheet.style.width = (wIn - marginIn*2 - 0.05) + 'in';
-
-    // Measure current size in screen CSS pixels
-    const rect = sheet.getBoundingClientRect();
-    const scale = Math.min(availWpx / rect.width, availHpx / rect.height, 1);
-
-    // Apply scale for print
-    const prevTransform = sheet.style.transform;
-    sheet.style.transform = 'scale(' + scale + ')';
-    sheet.style.transformOrigin = 'top left';
-
-    const restore = () => {
-      sheet.style.transform = prevTransform;
-      sheet.style.transformOrigin = '';
-      sheet.style.width = '';
-      window.removeEventListener('afterprint', restore);
-    };
-    window.addEventListener('afterprint', restore);
-
-    window.print();
   }
 
   // Listeners
