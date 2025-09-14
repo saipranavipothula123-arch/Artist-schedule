@@ -11,8 +11,8 @@
 <style>
   :root{
     --ink:#111; --muted:#444; --gray:#666; --bg:#fff; --bar:#e9ecef; --pad:12px;
-    /* ↓ Fonts reduced to 49% of the original (previous 70% × 70%) */
-    --fs: 0.49;
+    /* Fonts reduced to ~34.3% of the original (previous 49% × 70%) */
+    --fs: 0.343;
   }
 
   *{box-sizing:border-box}
@@ -64,8 +64,10 @@
     body{background:#fff; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
     .sheet{
       box-shadow:none; margin:0 auto; border:2px solid #000; page-break-inside: avoid;
-      width: 7.6in; padding: 12px; /* tighter fit on one page */
+      width: 7.55in; padding: 12px; /* tighter fit on one page */
     }
+    /* gentle fallback shrink if still long */
+    html{zoom:0.95;}
   }
 </style>
 </head>
@@ -402,7 +404,10 @@
     $('matchNote').textContent = T? (diff<=0.01 ? 'OK: Contract total matches total budget.' : 'Warning: Contract total does not match total budget.') : '';
   }
 
-  // Listeners
+  // Initialize once DOM is ready so fields start clean
+  document.addEventListener('DOMContentLoaded', recalc);
+
+  // Live updates
   $('budget').addEventListener('input', recalc);
   $('hp1').addEventListener('input', recalc);
 </script>
