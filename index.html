@@ -11,19 +11,35 @@
 <style>
   :root{
     --ink:#111; --muted:#444; --gray:#666; --bg:#fff; --bar:#e9ecef; --pad:12px;
+    /* ↓ Reduce all font sizes by 30% */
+    --fs: 0.7; /* 70% of original */
   }
+
   *{box-sizing:border-box}
-  html,body{margin:0;background:#f5f5f5;color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", sans-serif;}
+
+  html,body{
+    margin:0; background:#f5f5f5; color:var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", sans-serif;
+  }
+  /* Base font size scaled down by 30% */
+  body{ font-size: calc(16px * var(--fs)); }
+
   .sheet{
     width: 860px; margin:24px auto; background:var(--bg);
     box-shadow: 0 4px 28px rgba(0,0,0,.08);
     border: 2px solid #000; padding: 18px;
   }
   .title-row{display:flex; justify-content:space-between; align-items:flex-end; gap:8px; margin-bottom:6px;}
-  .title h1{font-size:20px; margin:0 0 4px 0; text-transform:uppercase; letter-spacing:.3px}
+  .title h1{
+    font-size: calc(20px * var(--fs));
+    margin:0 0 4px 0; text-transform:uppercase; letter-spacing:.3px
+  }
   .title small{color:var(--gray)}
   .hdr-grid{display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap:10px; margin:8px 0 14px;}
-  .linefield{border-bottom:1.5px solid #000; min-height:22px; padding:2px 6px; font-size:14px;}
+  .linefield{
+    border-bottom:1.5px solid #000; min-height: calc(22px * var(--fs)); padding:2px 6px;
+    font-size: calc(14px * var(--fs));
+  }
   .linefield input{width:100%; border:0; outline:0; font:inherit; background:transparent;}
   .bar{background:var(--bar); border:1.5px solid #000; padding:6px 10px; font-weight:700; text-transform:uppercase; margin-top:10px;}
   .block{border:1.5px solid #000; border-top:0; display:grid; grid-template-columns: 1.5fr 1.2fr; gap:0;}
@@ -35,9 +51,9 @@
   .amt{min-width:110px; text-align:right; font-variant-numeric: tabular-nums;}
   .check{display:flex; gap:8px; align-items:flex-start; margin:6px 0;}
   .check input{transform: translateY(2px)}
-  .muted{color:var(--muted); font-size:12px}
+  .muted{color:var(--muted)}
   .tight{line-height:1.15}
-  .small{font-size:12px}
+  .small{font-size: calc(12px * var(--fs));}
   .sumrow{display:flex; justify-content:flex-end; gap:12px; margin-top:6px; font-weight:700}
   .sumrow .v{min-width:140px; text-align:right; font-variant-numeric: tabular-nums;}
   .footer-actions{max-width:860px;margin:8px auto 24px;display:flex;justify-content:flex-end;gap:8px}
@@ -62,7 +78,7 @@
   <div class="title-row">
     <div class="title">
       <h1>FY25 Chelsea Flood Wall</h1>
-      <small>Job Sheet • Auto-calculates from Total Project Budget</small>
+      <small class="small">Job Sheet • Auto-calculates from Total Project Budget</small>
     </div>
     <div class="small muted">Print: File → Print (fits Letter/A4)</div>
   </div>
@@ -139,7 +155,7 @@
         <div class="amt" id="a_dp4">—</div>
       </div>
 
-      <div class="muted small tight"><strong>Note:</strong> DP payments are percentages of the Design Budget. HP1 is optional honorarium.</div>
+      <div class="small muted tight"><strong>Note:</strong> DP payments are percentages of the Design Budget. HP1 is optional honorarium.</div>
     </div>
     <div class="col">
       <div class="check"><input type="checkbox"><label>Hours supporting applicants</label></div>
@@ -147,7 +163,7 @@
       <div class="check"><input type="checkbox"><label>Community engagement</label></div>
       <div class="check"><input type="checkbox"><label>Hours supporting finalists</label></div>
       <div class="check"><input type="checkbox"><label>Finalists’ honorarium invoices received</label></div>
-      <div class="muted small">Trigger: After selection committee approval</div>
+      <div class="small muted">Trigger: After selection committee approval</div>
     </div>
   </div>
 
@@ -170,7 +186,7 @@
       <div class="check"><input type="checkbox"><label>W9 on file</label></div>
       <div class="check"><input type="checkbox"><label>DP1 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="muted small">Trigger: Contract signed, W9 on file, invoice received</div>
+      <div class="small muted">Trigger: Contract signed, W9 on file, invoice received</div>
     </div>
   </div>
 
@@ -193,7 +209,7 @@
       <div class="check"><input type="checkbox"><label>Insurance on file</label></div>
       <div class="check"><input type="checkbox"><label>DP2 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="muted small">Trigger: Schematic design approved by PAOC</div>
+      <div class="small muted">Trigger: Schematic design approved by PAOC</div>
     </div>
   </div>
 
@@ -242,7 +258,7 @@
     <div class="col">
       <div class="check"><input type="checkbox"><label>DP3/CP1 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="muted small">Trigger: Final design approval; authorization to begin fabrication</div>
+      <div class="small muted">Trigger: Final design approval; authorization to begin fabrication</div>
     </div>
   </div>
 
@@ -264,7 +280,7 @@
     <div class="col">
       <div class="check"><input type="checkbox"><label>CP2 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="muted small">Trigger: Approved at 50% fabrication progress</div>
+      <div class="small muted">Trigger: Approved at 50% fabrication progress</div>
     </div>
   </div>
 
@@ -286,7 +302,7 @@
     <div class="col">
       <div class="check"><input type="checkbox"><label>CP3 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="muted small">Trigger: Approved at 100% fabrication completion</div>
+      <div class="small muted">Trigger: Approved at 100% fabrication completion</div>
     </div>
   </div>
 
@@ -319,7 +335,7 @@
       <div class="check"><input type="checkbox"><label>Exit survey received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated to completed projects</label></div>
       <div class="check"><input type="checkbox"><label>Added to master public art inventory</label></div>
-      <div class="muted small">Trigger: Project closeout & acceptance / Artwork installed</div>
+      <div class="small muted">Trigger: Project closeout & acceptance / Artwork installed</div>
     </div>
   </div>
 
@@ -433,11 +449,6 @@
   // Listeners
   $('budget').addEventListener('input', recalc);
   $('hp1').addEventListener('input', recalc);
-</script>
-</body>
-</html>
-
-  // $('budget').value = 192000; recalc();
 </script>
 </body>
 </html>
