@@ -4,82 +4,71 @@
 <meta charset="utf-8">
 <title>FY25 Chelsea Flood Wall — Job Sheet</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Default paper size for print: letter | a4 -->
-<meta name="paper" content="letter">
-
 <style>
   :root{
-    --ink:#111; --muted:#444; --gray:#666; --bg:#fff; --bar:#e9ecef; --pad:12px;
-    /* Fonts reduced to ~34.3% of the original (previous 49% × 70%) */
-    --fs: 0.343;
+    --ink:#111; --muted:#444; --line:#1a1a1a; --gray:#666; --bg:#fff;
+    --bar:#e9ecef; --pad:12px;
   }
-
   *{box-sizing:border-box}
-
-  html,body{
-    margin:0; background:#f5f5f5; color:var(--ink);
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", sans-serif;
-  }
-  body{ font-size: calc(16px * var(--fs)); }
-
+  html,body{margin:0;background:#f5f5f5;color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", sans-serif;}
   .sheet{
     width: 860px; margin:24px auto; background:var(--bg);
     box-shadow: 0 4px 28px rgba(0,0,0,.08);
     border: 2px solid #000; padding: 18px;
   }
-  .title-row{display:flex; justify-content:space-between; align-items:flex-end; gap:8px; margin-bottom:6px;}
-  .title h1{
-    font-size: calc(20px * var(--fs));
-    margin:0 0 4px 0; text-transform:uppercase; letter-spacing:.3px
+  .title-row{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:8px; margin-bottom:6px;
   }
+  .title h1{font-size:20px; margin:0 0 4px 0; text-transform:uppercase; letter-spacing:.3px}
   .title small{color:var(--gray)}
-  .hdr-grid{display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap:10px; margin:8px 0 14px;}
-  .linefield{
-    border-bottom:1.5px solid #000; min-height: calc(22px * var(--fs)); padding:2px 6px;
-    font-size: calc(14px * var(--fs));
+  .hdr-grid{
+    display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap:10px; margin:8px 0 14px;
   }
-  .linefield input{width:100%; border:0; outline:0; font:inherit; background:transparent;}
+  .linefield{
+    border-bottom:1.5px solid #000; min-height:22px; padding:2px 6px; font-size:14px;
+  }
+  .linefield input{
+    width:100%; border:0; outline:0; font:inherit; background:transparent;
+  }
   .bar{background:var(--bar); border:1.5px solid #000; padding:6px 10px; font-weight:700; text-transform:uppercase; margin-top:10px;}
-  .block{border:1.5px solid #000; border-top:0; display:grid; grid-template-columns: 1.5fr 1.2fr; gap:0;}
+  .block{
+    border:1.5px solid #000; border-top:0;
+    display:grid; grid-template-columns: 1.5fr 1.2fr; gap:0; 
+  }
   .col{padding: var(--pad); border-right:1.5px solid #000;}
   .col:last-child{border-right:0}
   .inv-head{font-weight:700; margin-bottom:8px}
   .invline{display:grid; grid-template-columns: 22px 1fr auto; align-items:center; gap:8px; padding:2px 0;}
-  .invline input[type="text"]{border:0; border-bottom:1px solid #000; width:120px; background:transparent; font:inherit;}
+  .invline input[type="text"]{
+    border:0; border-bottom:1px solid #000; width:120px; background:transparent; font:inherit;
+  }
   .amt{min-width:110px; text-align:right; font-variant-numeric: tabular-nums;}
   .check{display:flex; gap:8px; align-items:flex-start; margin:6px 0;}
   .check input{transform: translateY(2px)}
-  .muted{color:var(--muted)}
+  .muted{color:var(--muted); font-size:12px}
   .tight{line-height:1.15}
-  .small{font-size: calc(12px * var(--fs));}
+  .two-col{columns:2; column-gap:18px}
+  .small{font-size:12px}
+  .right{float:right}
   .sumrow{display:flex; justify-content:flex-end; gap:12px; margin-top:6px; font-weight:700}
   .sumrow .v{min-width:140px; text-align:right; font-variant-numeric: tabular-nums;}
-
-  /* Keep sections intact when printing */
-  .block, .bar { break-inside: avoid; page-break-inside: avoid; }
-
   @media print{
-    @page{size: Letter; margin: 0.4in}
-    body{background:#fff; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
-    .sheet{
-      box-shadow:none; margin:0 auto; border:2px solid #000; page-break-inside: avoid;
-      width: 7.55in; padding: 12px; /* tighter fit on one page */
-    }
-    /* gentle fallback shrink if still long */
-    html{zoom:0.95;}
+    body{background:#fff}
+    .sheet{box-shadow:none; margin:0; width:auto; border:2px solid #000}
   }
+  /* Tiny helpers to echo the scanned look */
+  .underscore{border-bottom:1px solid #000; display:inline-block; min-width:140px; height:18px; vertical-align:baseline}
+  .section-note{border-top:1px dashed #aaa; margin-top:8px; padding-top:6px}
 </style>
 </head>
 <body>
-
-<div class="sheet" id="sheet">
+<div class="sheet">
 
   <!-- Header -->
   <div class="title-row">
     <div class="title">
       <h1>FY25 Chelsea Flood Wall</h1>
-      <small class="small">Job Sheet • Auto-calculates from Total Project Budget</small>
+      <small>Job Sheet • Auto-calculates from Total Project Budget</small>
     </div>
     <div class="small muted">Print: File → Print (fits Letter/A4)</div>
   </div>
@@ -131,7 +120,7 @@
 
       <div class="invline">
         <input type="checkbox">
-        <div>HP1&nbsp;INV&nbsp;<input type="text" placeholder=""></div>
+        <div>HP1&nbsp;INV&nbsp;<input type="text" placeholder=""> </div>
         <div class="amt" id="a_hp1">—</div>
       </div>
 
@@ -156,7 +145,9 @@
         <div class="amt" id="a_dp4">—</div>
       </div>
 
-      <div class="small muted tight"><strong>Note:</strong> DP payments are percentages of the Design Budget. HP1 is optional honorarium.</div>
+      <div class="section-note small muted tight">
+        <strong>Note:</strong> DP payments are percentages of the Design Budget. HP1 is optional honorarium.
+      </div>
     </div>
     <div class="col">
       <div class="check"><input type="checkbox"><label>Hours supporting applicants</label></div>
@@ -164,7 +155,7 @@
       <div class="check"><input type="checkbox"><label>Community engagement</label></div>
       <div class="check"><input type="checkbox"><label>Hours supporting finalists</label></div>
       <div class="check"><input type="checkbox"><label>Finalists’ honorarium invoices received</label></div>
-      <div class="small muted">Trigger: After selection committee approval</div>
+      <div class="muted small section-note">Trigger: After selection committee approval</div>
     </div>
   </div>
 
@@ -187,7 +178,7 @@
       <div class="check"><input type="checkbox"><label>W9 on file</label></div>
       <div class="check"><input type="checkbox"><label>DP1 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="small muted">Trigger: Contract signed, W9 on file, invoice received</div>
+      <div class="muted small section-note">Trigger: Contract signed, W9 on file, invoice received</div>
     </div>
   </div>
 
@@ -210,15 +201,16 @@
       <div class="check"><input type="checkbox"><label>Insurance on file</label></div>
       <div class="check"><input type="checkbox"><label>DP2 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="small muted">Trigger: Schematic design approved by PAOC</div>
+      <div class="muted small section-note">Trigger: Schematic design approved by PAOC</div>
     </div>
   </div>
 
-  <!-- DP3 + CP1 -->
+  <!-- DP3 + CP1 combined -->
   <div class="bar">DP3 – Final Design and CP1 – Start Fabrication</div>
   <div class="block">
     <div class="col">
       <div class="inv-head">INVOICE #</div>
+
       <div class="invline">
         <input type="checkbox">
         <div>PM&nbsp;DP3&nbsp;INV&nbsp;<input type="text" placeholder=""></div>
@@ -259,7 +251,7 @@
     <div class="col">
       <div class="check"><input type="checkbox"><label>DP3/CP1 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="small muted">Trigger: Final design approval; authorization to begin fabrication</div>
+      <div class="muted small section-note">Trigger: Final design approval; authorization to begin fabrication</div>
     </div>
   </div>
 
@@ -281,7 +273,7 @@
     <div class="col">
       <div class="check"><input type="checkbox"><label>CP2 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="small muted">Trigger: Approved at 50% fabrication progress</div>
+      <div class="muted small section-note">Trigger: Approved at 50% fabrication progress</div>
     </div>
   </div>
 
@@ -303,7 +295,7 @@
     <div class="col">
       <div class="check"><input type="checkbox"><label>CP3 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="small muted">Trigger: Approved at 100% fabrication completion</div>
+      <div class="muted small section-note">Trigger: Approved at 100% fabrication completion</div>
     </div>
   </div>
 
@@ -336,7 +328,7 @@
       <div class="check"><input type="checkbox"><label>Exit survey received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated to completed projects</label></div>
       <div class="check"><input type="checkbox"><label>Added to master public art inventory</label></div>
-      <div class="small muted">Trigger: Project closeout & acceptance / Artwork installed</div>
+      <div class="muted small section-note">Trigger: Project closeout & acceptance / Artwork installed</div>
     </div>
   </div>
 
@@ -366,13 +358,13 @@
   function recalc(){
     const T = Number($('budget').value)||0;
     const D = T*0.25, F = T*0.75;
-    const h = Number($('hp1').value)||0;
 
     $('budgetEcho').textContent = T? `Entered: ${fmt.format(T)}` : '';
+
     $('designBudget').textContent = D? fmt.format(D):'';
     $('fabBudget').textContent    = F? fmt.format(F):'';
 
-    // DP (of Design)
+    // DP amounts (of Design)
     const dp1 = D*0.25, dp2 = D*0.40, dp3 = D*0.30, dp4 = D*0.05;
     $('a_dp1').textContent = D? fmt.format(dp1):'—';
     $('a_dp2').textContent = D? fmt.format(dp2):'—';
@@ -382,7 +374,7 @@
     $('sum_dp2').textContent = D? fmt.format(dp2):'—';
     $('sum_dp4').textContent = D? fmt.format(dp4):'—';
 
-    // CP (of Fabrication)
+    // CP amounts (of Fabrication)
     const cp1 = F*0.45, cp2 = F*0.25, cp3 = F*0.25, cp4 = F*0.05;
     $('a_cp1').textContent = F? fmt.format(cp1):'—';
     $('a_cp2').textContent = F? fmt.format(cp2):'—';
@@ -394,22 +386,20 @@
     $('sum_cp4').textContent = F? fmt.format(cp4):'—';
 
     const contract = dp1+dp2+dp3+dp4+cp1+cp2+cp3+cp4;
-
-    $('a_hp1').textContent = h ? fmt.format(h) : '—';
+    const h = Number($('hp1').value)||0;
     $('contractTotal').textContent = T? fmt.format(contract):'—';
     $('honorTotal').textContent = fmt.format(h);
     $('grandTotal').textContent = fmt.format(contract+h);
 
+    // Check that contract equals total
     const diff = Math.abs(T - contract);
     $('matchNote').textContent = T? (diff<=0.01 ? 'OK: Contract total matches total budget.' : 'Warning: Contract total does not match total budget.') : '';
   }
 
-  // Initialize once DOM is ready so fields start clean
-  document.addEventListener('DOMContentLoaded', recalc);
-
-  // Live updates
   $('budget').addEventListener('input', recalc);
   $('hp1').addEventListener('input', recalc);
+  // Initialize for a common example (optional)
+  // $('budget').value = 192000; recalc();
 </script>
 </body>
 </html>
