@@ -4,10 +4,13 @@
 <meta charset="utf-8">
 <title>FY25 Chelsea Flood Wall — Job Sheet</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Default paper size for the one-page print scaler: letter | a4 -->
+<meta name="paper" content="letter">
+
 <style>
   :root{
-    --ink:#111; --muted:#444; --line:#1a1a1a; --gray:#666; --bg:#fff;
-    --bar:#e9ecef; --pad:12px;
+    --ink:#111; --muted:#444; --gray:#666; --bg:#fff; --bar:#e9ecef; --pad:12px;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:#f5f5f5;color:var(--ink);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", sans-serif;}
@@ -16,72 +19,44 @@
     box-shadow: 0 4px 28px rgba(0,0,0,.08);
     border: 2px solid #000; padding: 18px;
   }
-  .title-row{
-    display:flex; justify-content:space-between; align-items:flex-end; gap:8px; margin-bottom:6px;
-  }
+  .title-row{display:flex; justify-content:space-between; align-items:flex-end; gap:8px; margin-bottom:6px;}
   .title h1{font-size:20px; margin:0 0 4px 0; text-transform:uppercase; letter-spacing:.3px}
   .title small{color:var(--gray)}
-  .hdr-grid{
-    display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap:10px; margin:8px 0 14px;
-  }
-  .linefield{
-    border-bottom:1.5px solid #000; min-height:22px; padding:2px 6px; font-size:14px;
-  }
-  .linefield input{
-    width:100%; border:0; outline:0; font:inherit; background:transparent;
-  }
+  .hdr-grid{display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap:10px; margin:8px 0 14px;}
+  .linefield{border-bottom:1.5px solid #000; min-height:22px; padding:2px 6px; font-size:14px;}
+  .linefield input{width:100%; border:0; outline:0; font:inherit; background:transparent;}
   .bar{background:var(--bar); border:1.5px solid #000; padding:6px 10px; font-weight:700; text-transform:uppercase; margin-top:10px;}
-  .block{
-    border:1.5px solid #000; border-top:0;
-    display:grid; grid-template-columns: 1.5fr 1.2fr; gap:0; 
-  }
+  .block{border:1.5px solid #000; border-top:0; display:grid; grid-template-columns: 1.5fr 1.2fr; gap:0;}
   .col{padding: var(--pad); border-right:1.5px solid #000;}
   .col:last-child{border-right:0}
   .inv-head{font-weight:700; margin-bottom:8px}
   .invline{display:grid; grid-template-columns: 22px 1fr auto; align-items:center; gap:8px; padding:2px 0;}
-  .invline input[type="text"]{
-    border:0; border-bottom:1px solid #000; width:120px; background:transparent; font:inherit;
-  }
+  .invline input[type="text"]{border:0; border-bottom:1px solid #000; width:120px; background:transparent; font:inherit;}
   .amt{min-width:110px; text-align:right; font-variant-numeric: tabular-nums;}
   .check{display:flex; gap:8px; align-items:flex-start; margin:6px 0;}
   .check input{transform: translateY(2px)}
   .muted{color:var(--muted); font-size:12px}
   .tight{line-height:1.15}
-  .two-col{columns:2; column-gap:18px}
   .small{font-size:12px}
-  .right{float:right}
   .sumrow{display:flex; justify-content:flex-end; gap:12px; margin-top:6px; font-weight:700}
   .sumrow .v{min-width:140px; text-align:right; font-variant-numeric: tabular-nums;}
-  .footer-actions{max-width:860px;margin:8px auto 24px;display:flex;justify-content:flex-end}
+  .footer-actions{max-width:860px;margin:8px auto 24px;display:flex;justify-content:flex-end;gap:8px}
   .btn{appearance:none;border:1px solid #111;background:#111;color:#fff;border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer}
-  .btn:disabled{opacity:.6;cursor:not-allowed}
+
+  /* Keep sections intact if the user prints without the fitter */
+  .block, .bar { break-inside: avoid; page-break-inside: avoid; }
 
   @media print{
     @page{size: Letter; margin: 0.4in}
     body{background:#fff; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
-    .sheet{
-      box-shadow:none; margin:0 auto; border:2px solid #000;
-      width: 7.7in; /* target width so everything fits one Letter page */
-      padding: 12px;
-      page-break-inside: avoid;
-    }
-    .title h1{font-size:16px}
-    .small{font-size:10px}
-    .hdr-grid{gap:6px; margin:6px 0 10px}
-    .bar{padding:4px 8px}
-    .col{padding:8px}
-    .invline{gap:6px}
-    .footer-actions{display:none} /* hide the button when printing */
-    /* Fallback shrink for very long content (adjust if needed) */
-    html{zoom:0.92;}
+    .sheet{box-shadow:none; margin:0 auto; border:2px solid #000; page-break-inside: avoid;}
+    .footer-actions{display:none}
   }
-  /* Avoid accidental page breaks inside blocks */
-  .block, .bar { break-inside: avoid; page-break-inside: avoid; }
 </style>
 </head>
 <body>
 
-<div class="sheet">
+<div class="sheet" id="sheet">
 
   <!-- Header -->
   <div class="title-row">
@@ -164,9 +139,7 @@
         <div class="amt" id="a_dp4">—</div>
       </div>
 
-      <div class="section-note small muted tight">
-        <strong>Note:</strong> DP payments are percentages of the Design Budget. HP1 is optional honorarium.
-      </div>
+      <div class="muted small tight"><strong>Note:</strong> DP payments are percentages of the Design Budget. HP1 is optional honorarium.</div>
     </div>
     <div class="col">
       <div class="check"><input type="checkbox"><label>Hours supporting applicants</label></div>
@@ -174,7 +147,7 @@
       <div class="check"><input type="checkbox"><label>Community engagement</label></div>
       <div class="check"><input type="checkbox"><label>Hours supporting finalists</label></div>
       <div class="check"><input type="checkbox"><label>Finalists’ honorarium invoices received</label></div>
-      <div class="muted small section-note">Trigger: After selection committee approval</div>
+      <div class="muted small">Trigger: After selection committee approval</div>
     </div>
   </div>
 
@@ -197,7 +170,7 @@
       <div class="check"><input type="checkbox"><label>W9 on file</label></div>
       <div class="check"><input type="checkbox"><label>DP1 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="muted small section-note">Trigger: Contract signed, W9 on file, invoice received</div>
+      <div class="muted small">Trigger: Contract signed, W9 on file, invoice received</div>
     </div>
   </div>
 
@@ -220,16 +193,15 @@
       <div class="check"><input type="checkbox"><label>Insurance on file</label></div>
       <div class="check"><input type="checkbox"><label>DP2 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="muted small section-note">Trigger: Schematic design approved by PAOC</div>
+      <div class="muted small">Trigger: Schematic design approved by PAOC</div>
     </div>
   </div>
 
-  <!-- DP3 + CP1 combined -->
+  <!-- DP3 + CP1 -->
   <div class="bar">DP3 – Final Design and CP1 – Start Fabrication</div>
   <div class="block">
     <div class="col">
       <div class="inv-head">INVOICE #</div>
-
       <div class="invline">
         <input type="checkbox">
         <div>PM&nbsp;DP3&nbsp;INV&nbsp;<input type="text" placeholder=""></div>
@@ -270,7 +242,7 @@
     <div class="col">
       <div class="check"><input type="checkbox"><label>DP3/CP1 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="muted small section-note">Trigger: Final design approval; authorization to begin fabrication</div>
+      <div class="muted small">Trigger: Final design approval; authorization to begin fabrication</div>
     </div>
   </div>
 
@@ -292,7 +264,7 @@
     <div class="col">
       <div class="check"><input type="checkbox"><label>CP2 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="muted small section-note">Trigger: Approved at 50% fabrication progress</div>
+      <div class="muted small">Trigger: Approved at 50% fabrication progress</div>
     </div>
   </div>
 
@@ -314,7 +286,7 @@
     <div class="col">
       <div class="check"><input type="checkbox"><label>CP3 Artist invoice received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated</label></div>
-      <div class="muted small section-note">Trigger: Approved at 100% fabrication completion</div>
+      <div class="muted small">Trigger: Approved at 100% fabrication completion</div>
     </div>
   </div>
 
@@ -347,7 +319,7 @@
       <div class="check"><input type="checkbox"><label>Exit survey received</label></div>
       <div class="check"><input type="checkbox"><label>Website updated to completed projects</label></div>
       <div class="check"><input type="checkbox"><label>Added to master public art inventory</label></div>
-      <div class="muted small section-note">Trigger: Project closeout & acceptance / Artwork installed</div>
+      <div class="muted small">Trigger: Project closeout & acceptance / Artwork installed</div>
     </div>
   </div>
 
@@ -370,9 +342,9 @@
 
 </div>
 
-<!-- Bottom print button -->
-<div class="footer-actions no-print">
-  <button class="btn" onclick="window.print()">Print Single Page PDF</button>
+<!-- Bottom buttons -->
+<div class="footer-actions">
+  <button class="btn" onclick="fitAndPrint()">Print Single Page PDF</button>
 </div>
 
 <script>
@@ -384,11 +356,10 @@
     const D = T*0.25, F = T*0.75;
 
     $('budgetEcho').textContent = T? `Entered: ${fmt.format(T)}` : '';
-
     $('designBudget').textContent = D? fmt.format(D):'';
     $('fabBudget').textContent    = F? fmt.format(F):'';
 
-    // DP amounts (of Design)
+    // DP (of Design)
     const dp1 = D*0.25, dp2 = D*0.40, dp3 = D*0.30, dp4 = D*0.05;
     $('a_dp1').textContent = D? fmt.format(dp1):'—';
     $('a_dp2').textContent = D? fmt.format(dp2):'—';
@@ -398,7 +369,7 @@
     $('sum_dp2').textContent = D? fmt.format(dp2):'—';
     $('sum_dp4').textContent = D? fmt.format(dp4):'—';
 
-    // CP amounts (of Fabrication)
+    // CP (of Fabrication)
     const cp1 = F*0.45, cp2 = F*0.25, cp3 = F*0.25, cp4 = F*0.05;
     $('a_cp1').textContent = F? fmt.format(cp1):'—';
     $('a_cp2').textContent = F? fmt.format(cp2):'—';
@@ -415,11 +386,51 @@
     $('honorTotal').textContent = fmt.format(h);
     $('grandTotal').textContent = fmt.format(contract+h);
 
-    // Check that contract equals total
     const diff = Math.abs(T - contract);
     $('matchNote').textContent = T? (diff<=0.01 ? 'OK: Contract total matches total budget.' : 'Warning: Contract total does not match total budget.') : '';
   }
 
+  // --- One-page print helper ---
+  function fitAndPrint(){
+    const sheet = document.getElementById('sheet');
+
+    // paper size from <meta name="paper">
+    const paper = (document.querySelector('meta[name="paper"]')?.content || 'letter').toLowerCase();
+    let wIn = 8.5, hIn = 11;                // Letter
+    if (paper === 'a4') { wIn = 8.27; hIn = 11.69; }
+
+    const marginIn = 0.4;                   // matches @page margin
+    const availWpx = (wIn - marginIn*2) * 96;
+    const availHpx = (hIn - marginIn*2) * 96;
+
+    // Reset any previous transform
+    sheet.style.transform = '';
+    sheet.style.transformOrigin = '';
+
+    // Target width slightly less than printable width
+    sheet.style.width = (wIn - marginIn*2 - 0.05) + 'in';
+
+    // Measure current size in screen CSS pixels
+    const rect = sheet.getBoundingClientRect();
+    const scale = Math.min(availWpx / rect.width, availHpx / rect.height, 1);
+
+    // Apply scale for print
+    const prevTransform = sheet.style.transform;
+    sheet.style.transform = 'scale(' + scale + ')';
+    sheet.style.transformOrigin = 'top left';
+
+    const restore = () => {
+      sheet.style.transform = prevTransform;
+      sheet.style.transformOrigin = '';
+      sheet.style.width = '';
+      window.removeEventListener('afterprint', restore);
+    };
+    window.addEventListener('afterprint', restore);
+
+    window.print();
+  }
+
+  // Listeners
   $('budget').addEventListener('input', recalc);
   $('hp1').addEventListener('input', recalc);
 </script>
